@@ -1,0 +1,26 @@
+<% if @topic.errors.any? %>
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+<% end %>
+
+<%= form_for @topic, :url => topics_path do |f| %>
+
+  <!-- name->topic -->
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+
+  <!-- description->content -->
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Create", :class => "btn btn-primary" %>
+  </div>
+<% end %>

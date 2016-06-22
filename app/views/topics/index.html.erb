@@ -1,0 +1,15 @@
+<h1>Forum's List</h1>
+
+<%= link_to "New Topoc", new_topic_path %>
+
+<div class="table"></div>
+  <ul>
+    <% @topics.each do |t| %>
+      <li>
+        <%= link_to t.name, topic_path(t) %>
+        <%= link_to "Edit", edit_topic_path(t) %>
+        <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"} %>
+      </li>
+    <% end %>
+  </ul>
+</div>
