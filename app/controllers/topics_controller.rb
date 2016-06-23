@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
 
   #GET topics/
   def index
-    @topics = Topic.all
+    @topics = Topic.page(params[:page]).per(10)
   end
 
   #GET topics/new
@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
 
   #GET topic/:id
   def show
-    @comments = @topic.comments.all
+    @comments = @topic.comments.page(params[:page]).per(6)
 
     @comment = @topic.comments.build
   end
