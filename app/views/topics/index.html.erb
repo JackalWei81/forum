@@ -3,10 +3,25 @@
 <%= link_to "New Topic", new_topic_path, :class => "btn btn-info" %>
 
 <table class="table">
+  <tr>
+    <td class="label-success">
+      <strong>Topic</strong>
+    </td>
+    <td class="label-info">
+      <strong>Comment Count</strong>
+    </td>
+    <td class="label-primary">
+    </td>
+    <td class="label-danger">
+    </td>
+  </tr>
   <% @topics.each do |t| %>
   <tr>
       <td>
         <%= link_to t.name, topic_path(t) %>
+      </td>
+      <td>
+        <strong><%= t.comments.size%></strong>
       </td>
       <td>
         <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
