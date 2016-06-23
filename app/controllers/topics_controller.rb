@@ -45,6 +45,10 @@ class TopicsController < ApplicationController
   def about
   end
 
+  #GET topics/user/profile
+  def user_profile
+  end
+
   #GET topic/:id/edit
   def edit
   end
