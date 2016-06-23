@@ -4,10 +4,14 @@
 排序：
 <%= link_to "最後回覆時間", topics_path(:order => "updated_at")%>
 <%= link_to "最多人回覆", topics_path(:order => "comments_count")%>
+
 <table class="table">
   <tr>
     <td class="label-success">
       <strong>標題</strong>
+    </td>
+    <td>
+      <strong>分類</strong>
     </td>
     <td class="label-info">
       <strong>回覆數</strong>
@@ -24,6 +28,11 @@
   <tr>
       <td>
         <%= link_to t.name, topic_path(t) %>
+      </td>
+      <td>
+        <% t.categories.each do |c| %>
+          <%= c.name %>
+        <% end %>
       </td>
       <td>
         <strong><%= t.comments.size%></strong>
