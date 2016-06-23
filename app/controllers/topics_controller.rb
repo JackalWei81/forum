@@ -6,6 +6,11 @@ class TopicsController < ApplicationController
   #GET topics/
   def index
     @topics = Topic.all
+
+    if params[:category_id]
+      @topics = Category.find(id = params[:category_id]).topics
+    end
+
     if params[:order]
       if params[:order] == "updated_at"
         sort_by = "updated_at"

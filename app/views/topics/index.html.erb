@@ -7,6 +7,19 @@
 
 <%=  link_to "About", about_topics_path, :class => "btn btn-info pull-right" %>
 
+<div>
+  <%= form_tag topics_path, :method => :get do %>
+    分類：
+    <% Category.all.each do |e| %>
+    <td>
+      <%= radio_button_tag :category_id, e.id %>
+      <%= e.name %>
+    </td>
+    <% end %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
 <table class="table">
   <tr>
     <td class="label-success">
