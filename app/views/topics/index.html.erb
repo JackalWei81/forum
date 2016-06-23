@@ -5,6 +5,8 @@
 <%= link_to "最後回覆時間", topics_path(:order => "updated_at")%>
 <%= link_to "最多人回覆", topics_path(:order => "comments_count")%>
 
+<%=  link_to "About", about_topics_path, :class => "btn btn-info pull-right" %>
+
 <table class="table">
   <tr>
     <td class="label-success">

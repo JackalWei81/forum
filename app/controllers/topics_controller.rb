@@ -41,6 +41,10 @@ class TopicsController < ApplicationController
     @comment = @topic.comments.build
   end
 
+  #GET topics/about
+  def about
+  end
+
   #GET topic/:id/edit
   def edit
   end

@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :comments, :controller => "topic_comments"
+
+    collection do
+      get :about
+    end
   end
 
 
