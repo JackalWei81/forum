@@ -1,4 +1,15 @@
 <h1><%= "#{current_user.short_name}'s Profile  " %>   </h1>
 
-<h4>個人簡介:<br/>
-<%= current_user.bio%></h4>
+<h3>個人簡介:<br/>
+<%= current_user.bio%></h3>
+
+<h2>文章：</h2>
+<% current_user.topics.each do |t|  %>
+ <h3><%= link_to t.name,topic_path(t) %></h3>
+<% end %>
+<h2>回覆:</h2>
+<% current_user.comments.each do |c| %>
+  <h4><%= c.name %></h4>
+<% end %>
+
+<p><%= link_to "Back to index", topics_path %></p>

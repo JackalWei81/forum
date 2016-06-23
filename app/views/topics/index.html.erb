@@ -15,6 +15,9 @@
     <td>
       <strong>分類</strong>
     </td>
+    <td class="label-warning">
+      <strong>作者</strong>
+    </td>
     <td class="label-info">
       <strong>回覆數</strong>
     </td>
@@ -35,6 +38,9 @@
         <% t.categories.each do |c| %>
           <%= c.name %>
         <% end %>
+      </td>
+      <td>
+        <%= t.user.short_name%>
       </td>
       <td>
         <strong><%= t.comments.size%></strong>
