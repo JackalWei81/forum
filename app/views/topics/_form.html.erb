@@ -12,8 +12,18 @@
     <%= f.text_field :name, :class => "form-control" %>
   </div>
 
+  <!-- category->category -->
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category_ids, Category.all.map{ |c| [c.name, c.id]}, {}, :multiple => true, :class => "form-control" %>
+  </div>
+
   <!-- description->content -->
   <div class="form-group">
     <%= f.label :description, "Content" %>
     <%= f.text_area :description, :class => "form-control" %>
-  </div>
+    </div>
+
+  <script>
+    $('#topic_category_ids').select2();
+  </script>

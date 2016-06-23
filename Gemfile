@@ -18,6 +18,8 @@ gem 'bootstrap-sass', '~>3.3.4'
 
 gem 'devise'
 
+gem "select2-rails"
+
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 

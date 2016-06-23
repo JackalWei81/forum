@@ -1,5 +1,11 @@
 <h2><%= @topic.name%>'s Content</h2>
 
+<h4>
+<% @topic.categories.each do |c| %>
+  <%= c.name %>
+<% end %>
+</h4>
+
 <h3><%= @topic.description %></h3>
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
 <table class="table">
