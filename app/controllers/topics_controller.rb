@@ -16,6 +16,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
+      flash[:notice] = "New Success!!"
       redirect_to topics_path
     else
       render :action => :new
@@ -33,6 +34,7 @@ class TopicsController < ApplicationController
   #PATCH topic/:id
   def update
     if @topic.update(topic_params)
+      flash[:notice] = "Edited successfully!!"
       redirect_to topics_path
     else
       render :action => :edit
@@ -42,6 +44,7 @@ class TopicsController < ApplicationController
   #DELETE topic/:id
   def destroy
     @topic.destroy
+    flash[:alert] = "successfully deleted!!"
     redirect_to topics_path
   end
 

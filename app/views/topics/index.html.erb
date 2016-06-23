@@ -1,15 +1,19 @@
 <h1>Forum's List</h1>
 
-<%= link_to "New Topoc", new_topic_path %>
+<%= link_to "New Topic", new_topic_path, :class => "btn btn-info" %>
 
-<div class="table"></div>
-  <ul>
-    <% @topics.each do |t| %>
-      <li>
+<table class="table">
+  <% @topics.each do |t| %>
+  <tr>
+      <td>
         <%= link_to t.name, topic_path(t) %>
-        <%= link_to "Edit", edit_topic_path(t) %>
-        <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"} %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
+      </td>
+      <td>
+        <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
+      </td>
+  </tr>
+  <% end %>
+</table>

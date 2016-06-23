@@ -1,24 +1,6 @@
-<% if @topic.errors.any? %>
-      <ul>
-      <% @topic.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-<% end %>
-
 <%= form_for @topic, :url => topic_path(@topic), :method => :patch do |f| %>
 
-  <!-- name->topic -->
-  <div class="form-group">
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name, :class => "form-control" %>
-  </div>
-
-  <!-- description->content -->
-  <div class="form-group">
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description, :class => "form-control" %>
-  </div>
+  <%= render :partial => "form" , :locals => {:f => f} %>
 
   <div class="form-group">
     <%= f.submit "Update", :class => "btn btn-primary" %>
