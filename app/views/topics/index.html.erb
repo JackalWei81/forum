@@ -1,14 +1,19 @@
 <h1>Forum's List</h1>
 
 <%= link_to "New Topic", new_topic_path, :class => "btn btn-info" %>
-
+排序：
+<%= link_to "最後回覆時間", topics_path(:order => "updated_at")%>
+<%= link_to "最多人回覆", topics_path(:order => "comments_count")%>
 <table class="table">
   <tr>
     <td class="label-success">
-      <strong>Topic</strong>
+      <strong>標題</strong>
     </td>
     <td class="label-info">
-      <strong>Comment Count</strong>
+      <strong>回覆數</strong>
+    </td>
+    <td>
+      <strong>最後回覆時間</strong>
     </td>
     <td class="label-primary">
     </td>
@@ -22,6 +27,9 @@
       </td>
       <td>
         <strong><%= t.comments.size%></strong>
+      </td>
+      <td>
+        <%= t.updated_at.localtime %>
       </td>
       <td>
         <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>

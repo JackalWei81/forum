@@ -5,7 +5,17 @@ class TopicsController < ApplicationController
 
   #GET topics/
   def index
-    @topics = Topic.page(params[:page]).per(10)
+    @topics = Topic.all
+    if params[:order]
+      if params[:order] == "updated_at"
+        sort_by = "updated_at"
+      elsif params[:order] == "comments_count"
+        sort_by = "comments_count"
+      end
+      @topics = @topics.all.order("#{sort_by} DESC")
+    end
+
+    @topics = @topics.page( params[:page] ).per(10)
   end
 
   #GET topics/new

@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
   validates :name, presence: true
 
-  belongs_to :topic
+  belongs_to :topic, :counter_cache => true
 end
