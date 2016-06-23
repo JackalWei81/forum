@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
-      flash[:notice] = "New Success!!"
+      flash[:notice] = "Created successfully!!"
       redirect_to topics_path
     else
       render :action => :new
@@ -26,6 +26,9 @@ class TopicsController < ApplicationController
 
   #GET topic/:id
   def show
+    @comments = @topic.comments.all
+
+    @comment = @topic.comments.build
   end
 
   #GET topic/:id/edit
@@ -45,7 +48,7 @@ class TopicsController < ApplicationController
   #DELETE topic/:id
   def destroy
     @topic.destroy
-    flash[:alert] = "successfully deleted!!"
+    flash[:alert] = "Deleted successfully !!"
     redirect_to topics_path
   end
 

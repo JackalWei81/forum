@@ -1,0 +1,9 @@
+<%= form_for @comment, :url => topic_comment_path(@topic, @comment), :mtehod => :patch,  :class => "form" do |f| %>
+  <div class="form-group ">
+  <%= f.label :name, "comment" %>
+  <%= f.text_field :name, :class => "form-control"  %>
+  </div>
+
+  <%= f.submit "Save", :class => "btn btn-primary" %>
+  <%= link_to "Cancel", topic_path(@topic), :class=>"btn btn-default" %>
+<% end %>

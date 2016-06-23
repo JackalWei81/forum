@@ -3,3 +3,29 @@
 <h3><%= @topic.description %></h3>
 
 <%= link_to "Back to Index", topics_path %>
+
+<table class="table">
+    <% @comments.each do |c|%>
+      <tr>
+        <td>
+          <%= c.name %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_topic_comment_path(@topic, c), :class => "btn btn-primary" %>
+        </td>
+        <td>
+          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end %>
+</table>
+
+<%= form_for @comment, :url => topic_comments_path(@topic),  :class => "form" do |f| %>
+  <div class="form-group ">
+  <%= f.label :name, "comment" %>
+  <%= f.text_field :name, :class => "form-control"  %>
+  </div>
+
+  <%= f.submit "Save", :class => "btn btn-primary" %>
+  <%= link_to "Cancel", :back, :class=>"btn btn-default" %>
+<% end %>

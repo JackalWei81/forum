@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :topics
+
+  resources :topics do
+    resources :comments, :controller => "topic_comments"
+  end
 
 
 
