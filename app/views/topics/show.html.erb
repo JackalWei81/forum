@@ -14,12 +14,18 @@
         <td>
           <%= c.name %>
         </td>
-        <td>
-          <%= link_to "Edit", edit_topic_comment_path(@topic, c), :class => "btn btn-primary" %>
-        </td>
-        <td>
-          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
-        </td>
+        <% if user_signed_in? %>
+          <td>
+            <% if current_user.author?(c) %>
+              <%= link_to "Edit", edit_topic_comment_path(@topic, c), :class => "btn btn-primary" %>
+            <% end %>
+          </td>
+          <td>
+            <% if current_user.author?(c) %>
+              <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
+            <% end %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
 </table>

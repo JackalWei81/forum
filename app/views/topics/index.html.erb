@@ -68,12 +68,18 @@
       <td>
         <%= t.updated_at.localtime %>
       </td>
-      <td>
-        <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
-      </td>
-      <td>
-        <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
-      </td>
+      <% if user_signed_in? %>
+        <td>
+          <% if current_user.author?(t) %>
+            <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
+          <% end %>
+        </td>
+        <td>
+          <% if current_user.author?(t) %>
+            <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
+            <% end %>
+        </td>
+      <% end %>
   </tr>
   <% end %>
 </table>

@@ -64,6 +64,10 @@ class TopicsController < ApplicationController
 
   #GET topic/:id/edit
   def edit
+    unless current_user.author?(@topic)
+      flash[:alert] = "You are not author!!"
+      redirect_to topics_path
+    end
   end
 
   #PATCH topic/:id
@@ -78,8 +82,12 @@ class TopicsController < ApplicationController
 
   #DELETE topic/:id
   def destroy
-    @topic.destroy
-    flash[:alert] = "Deleted successfully !!"
+    if current_user.author?(@topic)
+      @topic.destroy
+      flash[:alert] = "Deleted successfully !!"
+    else
+      flash[:alert] = "You are not author!!"
+    end
     redirect_to topics_path
   end
 

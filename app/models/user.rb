@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
   def short_name
     self.email.split("@").first
   end
+
+  def author?(user)
+    if self.id == user.user_id
+      return true
+    end
+  end
 end
