@@ -21,7 +21,7 @@
       <% end %>
 
       <div class="user pull-right">
-      <% if current_user %>
+      <% if user_signed_in? %>
         Hi, <%= link_to current_user.short_name, user_profile_topics_path %>
         <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
         <%= link_to('修改密碼', edit_registration_path(:user)) %>
