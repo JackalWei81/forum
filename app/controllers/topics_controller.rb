@@ -7,8 +7,8 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.all
 
-    if params[:category_id]
-      @topics = Category.find(id = params[:category_id]).topics
+    if params[:Category]
+      @topics = Category.find(params[:Category]).topics
     end
 
     if params[:order]

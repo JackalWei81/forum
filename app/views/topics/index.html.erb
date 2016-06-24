@@ -11,13 +11,8 @@
 <div>
   <%= form_tag topics_path, :method => :get do %>
     分類：
-    <% Category.all.each do |e| %>
-    <td>
-      <%= radio_button_tag :category_id, e.id %>
-      <%= e.name %>
-    </td>
-    <% end %>
-    <%= submit_tag "Search" %>
+    <%= select_tag "Category", options_from_collection_for_select(Category.all, "id", "name"), :class => "form-control",:include_blank => "Please Select"   %>
+    <%= submit_tag "Select" %>
   <% end %>
 </div>
 
@@ -84,3 +79,7 @@
   <% end %>
 </table>
 <%= paginate @topics, :theme => 'twitter-bootstrap-3' %>
+
+  <script>
+    $('#Category').select2();
+  </script>
