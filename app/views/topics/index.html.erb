@@ -18,58 +18,62 @@
 
 <table class="table">
   <tr>
-    <td>
+    <td class="text-center">
       <strong>標題</strong>
     </td>
-    <td>
+    <td class="text-center">
       <strong>分類</strong>
     </td>
-    <td>
+    <td class="text-center">
       <strong>作者</strong>
     </td>
-    <td>
-      <strong>回覆數</strong>
+    <td class="text-center">
+      <strong>回覆數/瀏覽數</strong>
     </td>
-    <td>
-      <strong>瀏覽數</strong>
-    </td>
-    <td>
+    <td class="text-center">
       <strong>最後回覆時間</strong>
     </td>
-    <td>
+    <td class="text-center">
+      <strong>回覆者</strong>
     </td>
-    <td>
+    <td class="text-center">
+      <strong>編輯</strong>
+    </td>
+    <td class="text-center">
+      <strong>刪除</strong>
     </td>
   </tr>
   <% @topics.each do |t| %>
   <tr>
-      <td>
+      <td class="text-center">
         <%= link_to t.name, topic_path(t) %>
       </td>
-      <td>
+      <td class="text-center">
         <% t.categories.each do |c| %>
           <%= c.name %>
         <% end %>
       </td>
-      <td>
+      <td class="text-center">
         <%= t.user.short_name%>
       </td>
-      <td>
-        <strong><%= t.comments.size%></strong>
+      <td class="text-center">
+        <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>
       </td>
-      <td>
-        <strong><%= t.views_count %></strong>
-      </td>
-      <td>
+      <td class="text-center">
         <%= t.updated_at.localtime %>
       </td>
+      <td class="text-center">
+        <% t.comments.each do |c| %>
+          <%= c.user.short_name %>
+        <% end %>
+      </td>
       <% if user_signed_in? %>
-        <td>
+        <td class="text-center">
           <% if current_user.author?(t) %>
             <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
           <% end %>
         </td>
-        <td>
+        <td class="text-center">
           <% if current_user.author?(t) %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
             <% end %>

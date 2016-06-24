@@ -22,7 +22,7 @@
 
       <div class="user pull-right">
       <% if user_signed_in? %>
-        Hi, <%= link_to current_user.short_name, user_profile_topics_path %>
+        <%= link_to current_user.short_name, user_profile_topics_path %>,你好!
         <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
         <%= link_to('修改密碼', edit_registration_path(:user)) %>
       <% else %>
@@ -30,7 +30,7 @@
         <%= link_to('登入', new_session_path(:user)) %>
       <% end %>
       </div>
-
+      <div class="clearfix"></div>
       <%= yield %>
     </div>
   </div>
