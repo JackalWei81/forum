@@ -4,6 +4,7 @@
 排序：
 <%= link_to "最後回覆時間", topics_path(:order => "updated_at")%>
 <%= link_to "最多人回覆", topics_path(:order => "comments_count")%>
+<%= link_to "最多瀏覽數", topics_path(:order => "views_count")%>
 
 <%=  link_to "About", about_topics_path, :class => "btn btn-info pull-right" %>
 
@@ -22,24 +23,27 @@
 
 <table class="table">
   <tr>
-    <td class="label-success">
+    <td>
       <strong>標題</strong>
     </td>
     <td>
       <strong>分類</strong>
     </td>
-    <td class="label-warning">
+    <td>
       <strong>作者</strong>
     </td>
-    <td class="label-info">
+    <td>
       <strong>回覆數</strong>
+    </td>
+    <td>
+      <strong>瀏覽數</strong>
     </td>
     <td>
       <strong>最後回覆時間</strong>
     </td>
-    <td class="label-primary">
+    <td>
     </td>
-    <td class="label-danger">
+    <td>
     </td>
   </tr>
   <% @topics.each do |t| %>
@@ -57,6 +61,9 @@
       </td>
       <td>
         <strong><%= t.comments.size%></strong>
+      </td>
+      <td>
+        <strong><%= t.views_count %></strong>
       </td>
       <td>
         <%= t.updated_at.localtime %>

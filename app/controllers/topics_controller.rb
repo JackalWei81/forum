@@ -16,8 +16,12 @@ class TopicsController < ApplicationController
         sort_by = "updated_at"
       elsif params[:order] == "comments_count"
         sort_by = "comments_count"
+      elsif params[:order] == "views_count"
+        sort_by = "views_count"
+      else
+        sort_by = "id"
       end
-      @topics = @topics.all.order("#{sort_by} DESC")
+      @topics = @topics.order("#{sort_by} DESC")
     end
 
     @topics = @topics.page( params[:page] ).per(10)
@@ -42,8 +46,11 @@ class TopicsController < ApplicationController
 
   #GET topic/:id
   def show
-    @comments = @topic.comments.page(params[:page]).per(6)
+    #計數連結被點次數
+    @topic.views_count += 1
+    @topic.save
 
+    @comments = @topic.comments.page(params[:page]).per(6)
     @comment = @topic.comments.build
   end
 
