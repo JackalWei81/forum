@@ -1,11 +1,13 @@
 <h2><%= @topic.name%>'s Content</h2>
 
 <h4>
+<div class="facebood-good">
+<iframe src="https://www.facebook.com/plugins/like.php?href=<%= topic_url(@topic) %>&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="50" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+</div>
 <% @topic.categories.each do |c| %>
   <%= c.name %>
 <% end %>
 </h4>
-
 <h3><%= @topic.description %></h3>
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
 <table class="table">
