@@ -1,1 +1,21 @@
 <h1>Category Admin Page</h1>
+
+<%= link_to "New Category", new_admin_category_path, :class => "btn btn-info" %>
+
+<table class="table">
+<% @categories.each do |c| %>
+  <tr>
+    <td>
+      <h5> <%= c.name %> </h5>
+    </td>
+    <td>
+      <%= link_to "Edit", edit_admin_category_path(c), :class => "btn btn-primary" %>
+    </td>
+    <td>
+      <% unless category_used?(c) %>
+        <%= link_to "Delete", admin_category_path(c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
