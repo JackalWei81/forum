@@ -1,5 +1,6 @@
 <h1><%= "#{current_user.short_name}'s Profile  " %>   </h1>
 
+<%= image_tag current_user.gravatar_url %>
 <h3>個人簡介:<br/>
 <%= current_user.bio%></h3>
 

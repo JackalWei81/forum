@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  include Gravtastic
+  gravtastic
+
   has_many :topics, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   # Include default devise modules. Others available are:
@@ -12,8 +15,8 @@ class User < ActiveRecord::Base
     self.email.split("@").first
   end
 
-  def author?(user)
-    if self.id == user.user_id
+  def is_author?(recorder)
+    if self.id == recorder.user_id
       return true
     end
   end

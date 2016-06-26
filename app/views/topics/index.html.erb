@@ -69,12 +69,12 @@
       </td>
       <% if user_signed_in? %>
         <td class="text-center">
-          <% if current_user.author?(t) %>
+          <% if current_user.is_author?(t) %>
             <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
           <% end %>
         </td>
         <td class="text-center">
-          <% if current_user.author?(t) %>
+          <% if current_user.is_author?(t) %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
             <% end %>
         </td>
