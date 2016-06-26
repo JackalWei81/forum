@@ -8,6 +8,11 @@ Rails.application.routes.draw do
       get :about
       get :user_profile
     end
+
+    member do
+      post :favorite
+      post :unfavorite
+    end
   end
 
 

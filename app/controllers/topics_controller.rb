@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
 
-  before_action :set_topic, :only => [:show, :edit, :update, :destroy]
+  before_action :set_topic, :only => [:show, :edit, :update, :destroy, :favorite, :unfavorite]
   before_action :authenticate_user!, :except => [:index, :show]
 
   #GET topics/
@@ -91,6 +91,19 @@ class TopicsController < ApplicationController
     redirect_to topics_path
   end
 
+  def favorite
+    @favorite = @topic.find_my_favorite(current_user)
+    unless @favorite
+      @favorite = FavoriteTopic.create!(:topic => @topic, :user => current_user)
+    end
+    redirect_to :back
+  end
+
+  def unfavorite
+    @favorite = @topic.find_my_favorite(current_user)
+    @favorite.destroy if @favorite
+    redirect_to :back
+  end
 
   #以下為controller內部使用的method
   protected

@@ -12,7 +12,7 @@
   <%= form_tag topics_path, :method => :get do %>
     分類：
     <%= select_tag "Category", options_from_collection_for_select(Category.all, "id", "name"), :class => "form-control",:include_blank => "Please Select"   %>
-    <%= submit_tag "Select" %>
+    <%= submit_tag "Select", :class => "btn btn-info" %>
   <% end %>
 </div>
 
