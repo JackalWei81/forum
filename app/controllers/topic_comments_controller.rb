@@ -16,7 +16,7 @@ class TopicCommentsController < ApplicationController
 
   def edit
     @comment = @topic.comments.find(params[:id])
-    unless current_user.author?(@comment)
+    unless current_user.is_author?(@comment)
       flash[:alert] = "You are not author!!"
       redirect_to topic_path(@topic)
     end
@@ -35,7 +35,7 @@ class TopicCommentsController < ApplicationController
 
   def destroy
     @comment = @topic.comments.find(params[:id])
-    if current_user.author?(@comment)
+    if current_user.is_author?(@comment)
       @comment.destroy
       flash[:alert] = "Delete successfully!!"
     else

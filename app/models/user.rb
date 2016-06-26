@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def is_author?(recorder)
-    if self.id == recorder.user_id
+    if self == recorder.user
       return true
     end
   end
