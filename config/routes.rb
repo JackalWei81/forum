@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :profiles
 
+  namespace :admin do
+    resources :topics
+  end
+
   resources :topics do
     resources :comments, :controller => "topic_comments"
 

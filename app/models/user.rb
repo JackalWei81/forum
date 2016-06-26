@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
       return true
     end
   end
+
+    def is_role?
+      self.role == "admin"
+  end
 end

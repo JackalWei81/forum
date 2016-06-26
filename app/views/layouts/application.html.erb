@@ -15,10 +15,14 @@
         <div class="alert alert-success" role="alert"><%=flash[:notice] %>
         </div>
       <% end %>
-
       <% if flash[:alert].present? %>
         <div class="alert alert-danger" role="alert"><%=flash[:alert] %> </div>
       <% end %>
+
+      <% if user_signed_in? && current_user.is_role? %>
+        <%= link_to "Admin", admin_topics_path, :class => "btn btn-danger" %>
+      <% end %>
+
 
       <div class="user pull-right">
       <% if user_signed_in? %>

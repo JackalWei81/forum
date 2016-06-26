@@ -44,7 +44,7 @@
     </td>
   </tr>
   <% @topics.each do |t| %>
-    <% if t.status == "published" || current_user.is_author?(t) %>
+    <% if t.status == "published" || (user_signed_in? && (current_user.is_role? || current_user.is_author?(t))) %>
       <tr>
         <td>
           <%= link_to t.name, topic_path(t) %>
@@ -61,7 +61,7 @@
           <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>
         </td>
         <td class="text-center">
-          <%= t.updated_at.localtime %>
+          <%= t.updated_at.localtime.strftime('%b %d %Y %H:%M') %>
         </td>
         <td class="text-center">
           <% t.comments.each do |c| %>
@@ -75,7 +75,7 @@
           <% end %>
         </td>
         <td class="text-center">
-          <% if current_user.is_author?(t) %>
+          <% if current_user.is_author?(t) || current_user.is_role? %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
           <% end %>
         </td>
