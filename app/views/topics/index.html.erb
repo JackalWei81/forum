@@ -44,30 +44,31 @@
     </td>
   </tr>
   <% @topics.each do |t| %>
-  <tr>
-      <td class="text-center">
-        <%= link_to t.name, topic_path(t) %>
-      </td>
-      <td class="text-center">
-        <% t.categories.each do |c| %>
-          <%= c.name %>
-        <% end %>
-      </td>
-      <td class="text-center">
-        <%= t.user.short_name%>
-      </td>
-      <td class="text-center">
-        <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>
-      </td>
-      <td class="text-center">
-        <%= t.updated_at.localtime %>
-      </td>
-      <td class="text-center">
-        <% t.comments.each do |c| %>
-          <%= c.user.short_name %>
-        <% end %>
-      </td>
-      <% if user_signed_in? %>
+    <% if t.status == "published" || current_user.is_author?(t) %>
+      <tr>
+        <td>
+          <%= link_to t.name, topic_path(t) %>
+        </td>
+        <td class="text-center">
+          <% t.categories.each do |c| %>
+            <%= c.name %>
+          <% end %>
+        </td>
+        <td class="text-center">
+          <%= t.user.short_name%>
+        </td>
+        <td class="text-center">
+          <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>
+        </td>
+        <td class="text-center">
+          <%= t.updated_at.localtime %>
+        </td>
+        <td class="text-center">
+          <% t.comments.each do |c| %>
+            <%= c.user.short_name %>
+          <% end %>
+        </td>
+        <% if user_signed_in? %>
         <td class="text-center">
           <% if current_user.is_author?(t) %>
             <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
@@ -76,10 +77,11 @@
         <td class="text-center">
           <% if current_user.is_author?(t) %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
-            <% end %>
+          <% end %>
         </td>
-      <% end %>
-  </tr>
+        <% end %>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 <%= paginate @topics, :theme => 'twitter-bootstrap-3' %>

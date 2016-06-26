@@ -1,4 +1,4 @@
-<h2><%= @topic.name%>'s Content</h2>
+<h2><%= @topic.name%></h2>
 <div class="favorite pull-right">
 <% if user_signed_in? %>
   <% unless @topic.find_my_favorite(current_user) %>
@@ -12,40 +12,50 @@
 <div class="facebood-good">
 <iframe src="https://www.facebook.com/plugins/like.php?href=<%= topic_url(@topic) %>&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="50" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 </div>
+<hr>
 <h4>
 <% @topic.categories.each do |c| %>
   <%= c.name %>
 <% end %>
+<hr>
 </h4>
 <h3><%= @topic.description %></h3>
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
 <table class="table">
-    <% @comments.each do |c|%>
-      <tr>
-        <td>
-          <%= c.name %>
-        </td>
-        <% if user_signed_in? %>
-          <td>
-            <% if current_user.is_author?(c) %>
-              <%= link_to "Edit", edit_topic_comment_path(@topic, c), :class => "btn btn-primary" %>
-            <% end %>
-          </td>
-          <td>
-            <% if current_user.is_author?(c) %>
-              <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
-            <% end %>
-          </td>
+  <% @comments.each do |c|%>
+    <% if c.status == "published" || current_user.is_author?(c) %>
+    <tr>
+      <td>
+        <%= c.name %>
+      </td>
+      <% if user_signed_in? %>
+      <td>
+        <% if current_user.is_author?(c) %>
+          <%= link_to "Edit", edit_topic_comment_path(@topic, c), :class => "btn btn-primary" %>
         <% end %>
-      </tr>
+      </td>
+      <td>
+        <% if current_user.is_author?(c) %>
+          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
     <% end %>
+  <% end %>
 </table>
+<hr>
 <%= paginate @comments, :theme => 'twitter-bootstrap-3' %>
 <!-- [@topic , @comment] -->
 <%= form_for @comment, :url => topic_comments_path(@topic),  :class => "form" do |f| %>
   <div class="form-group ">
   <%= f.label :name, "comment" %>
   <%= f.text_field :name, :class => "form-control"  %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :status, "Status" %>
+  <%= f.select :status, [["Published","published"],["Draft","draft"]] %>
   </div>
 
   <%= f.submit "Save", :class => "btn btn-primary" %>
