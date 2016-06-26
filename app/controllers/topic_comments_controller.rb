@@ -14,13 +14,12 @@ class TopicCommentsController < ApplicationController
     redirect_to topic_path(@topic)
   end
 
-  def edit
-    @comment = @topic.comments.find(params[:id])
-    unless current_user.is_author?(@comment)
-      flash[:alert] = "You are not author!!"
-      redirect_to topic_path(@topic)
-    end
-  end
+  # def edit
+  #   @comment = @topic.comments.find(params[:id])
+  #   unless current_user.is_author?(@comment)
+  #     flash[:alert] = "You are not author!!"
+  #   end
+  # end
 
   def update
     @comment = @topic.comments.find(params[:id])

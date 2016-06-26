@@ -51,7 +51,7 @@ class TopicsController < ApplicationController
     @topic.save
 
     @comments = @topic.comments.page(params[:page]).per(6)
-    @comment = @topic.comments.build
+    params[:e_id] ? @comment = @topic.comments.find(params[:e_id]) : @comment = @topic.comments.build
   end
 
   #GET topics/about
