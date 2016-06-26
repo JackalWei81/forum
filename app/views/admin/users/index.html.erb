@@ -1,0 +1,14 @@
+<h1>User Admin Page</h1>
+
+<table class="table">
+<% @users.each do |u| %>
+  <tr>
+    <td>
+      <h5> <%= u.short_name %> </h5>
+    </td>
+    <td>
+      <%= link_to "Show", admin_user_path(u), :class => "btn btn-primary"  %>
+    </td>
+  </tr>
+<% end %>
+</table>

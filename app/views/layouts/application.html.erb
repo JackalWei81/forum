@@ -20,7 +20,7 @@
       <% end %>
 
       <% if user_signed_in? && current_user.is_role? %>
-        <%= link_to "Admin", admin_topics_path, :class => "btn btn-danger" %>
+        <%= link_to "Enter Admin", admin_topics_path, :class => "btn btn-danger" %>
       <% end %>
 
 

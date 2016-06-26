@@ -1,0 +1,18 @@
+<h2><%= @user.short_name %></h2>
+
+<h4> email:  <%= @user.email %> </h4>
+<h4> 個人簡介: <%= @user.profile.bio %></h4>
+<h4> 登入次數:  <%= @user.sign_in_count %></h4>
+<h4> 註冊日期:  <%= @user.created_at.strftime('%b %d %Y') %></h4>
+<h4> 管理者: <%= @user.role == "Admin" ? "是" : "否" %></h4>
+
+<hr>
+<div>
+  <%= form_tag admin_user_path(@user), :method => :patch do %>
+    <div class="form-group">
+    <%= label :admin, "權限設定" %>
+    <%= select_tag :admin, options_for_select([ "Admin", "Not Admin" ]), :class => "form-control" %>
+    </div>
+    <%= submit_tag "Update", :class => "btn btn-info" %>
+  <% end %>
+</div>
