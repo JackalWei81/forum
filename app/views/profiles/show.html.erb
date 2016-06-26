@@ -4,13 +4,17 @@
 <h3>個人簡介:<br/>
 <%= @profile.bio%></h3>
 
-<h2>文章：</h2>
+<h2>Topics:</h2>
 <% current_user.topics.each do |t|  %>
- <h3><%= link_to t.name,topic_path(t) %></h3>
+ <h3><%= link_to t.name, topic_path(t) %></h3>
 <% end %>
-<h2>回覆:</h2>
+<h2>Comments:</h2>
 <% current_user.comments.each do |c| %>
   <h4><%= c.name %></h4>
+<% end %>
+<h2>Favorite:</h2>
+<% current_user.favorites.each do |f| %>
+  <h3><%= link_to f.name, topic_path(f) %></h3>
 <% end %>
 
 <p><%= link_to "Back to index", topics_path %></p>
