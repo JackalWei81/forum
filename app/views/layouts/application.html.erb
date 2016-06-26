@@ -22,9 +22,18 @@
 
       <div class="user pull-right">
       <% if user_signed_in? %>
-        <%= link_to current_user.short_name, user_profile_topics_path %>，你好~
+        <% if current_user.profile %>
+          <%= link_to current_user.short_name, profile_path(current_user.profile) %>
+        <% else %>
+          <%= current_user.short_name %>
+        <% end %>,你好!
         <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-        <%= link_to('修改密碼', edit_registration_path(:user)) %>
+        <%= link_to('修改密碼', edit_registration_path(:user)) %>  |
+        <% unless current_user.profile %>
+          <%= link_to "新增個人簡介", new_profile_path %>
+        <% else %>
+          <%= link_to "編輯個人簡介", edit_profile_path(current_user.profile) %>
+        <% end %>
       <% else %>
         <%= link_to('註冊', new_registration_path(:user)) %> |
         <%= link_to('登入', new_session_path(:user)) %>

@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
+  resources :profiles
+
   resources :topics do
     resources :comments, :controller => "topic_comments"
 
     collection do
       get :about
-      get :user_profile
     end
 
     member do

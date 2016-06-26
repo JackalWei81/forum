@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626075346) do
+ActiveRecord::Schema.define(version: 20160626101149) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20160626075346) do
 
   add_index "favorite_topics", ["topic_id"], name: "index_favorite_topics_on_topic_id"
   add_index "favorite_topics", ["user_id"], name: "index_favorite_topics_on_user_id"
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "topic_categoryships", force: :cascade do |t|
     t.integer  "topic_id"
@@ -72,7 +81,6 @@ ActiveRecord::Schema.define(version: 20160626075346) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.text     "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
