@@ -19,6 +19,8 @@ gem 'bootstrap-sass', '~>3.3.4'
 gem 'devise'
 # select
 gem "select2-rails"
+#upload file
+gem "paperclip", "~> 5.0.0.beta1"
 # pages
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'

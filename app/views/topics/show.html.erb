@@ -13,6 +13,10 @@
 <iframe src="https://www.facebook.com/plugins/like.php?href=<%= topic_url(@topic) %>&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="50" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 </div>
 <hr>
+<% if @topic.avatar.exists? %>
+  <%= image_tag(@topic.avatar.url(:medium)) %>
+<% end %>
+<hr>
 <h4>
 <% @topic.categories.each do |c| %>
   <%= c.name %>
@@ -28,6 +32,9 @@
       <td>
         <%= c.name %>
       </td>
+      <% if c.avatar.exists? %>
+        <%= image_tag(c.avatar.url(:medium)) %>
+      <% end %>
       <% if user_signed_in? %>
       <td>
         <% if current_user.is_author?(c) %>
@@ -51,6 +58,13 @@
   <div class="form-group ">
   <%= f.label :name, "comment" %>
   <%= f.text_field :name, :class => "form-control"  %>
+  </div>
+
+    <div class="form-group">
+    <%= f.file_field :avatar %>
+    <% if @comment.avatar.exists? %>
+      <%= check_box_tag "remove_image", "1" %> Remove Image
+    <% end %>
   </div>
 
   <div class="form-group">

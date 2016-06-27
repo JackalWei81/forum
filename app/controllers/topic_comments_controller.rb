@@ -16,6 +16,9 @@ class TopicCommentsController < ApplicationController
 
   def update
     @comment = @topic.comments.find(params[:id])
+    if params[:remove_image] == "1"
+      @comment.avatar = nil
+    end
     if @comment.update(comment_params)
       flash[:notice] = "Edited successfully!!"
       redirect_to topic_path(@topic)
@@ -44,7 +47,7 @@ class TopicCommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:name, :status)
+    params.require(:comment).permit(:name, :avatar, :status)
   end
 
 end

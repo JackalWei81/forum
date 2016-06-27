@@ -75,6 +75,11 @@ class TopicsController < ApplicationController
 
   #PATCH topic/:id
   def update
+
+    if params[:remove_image] == "1"
+      @topic.avatar = nil
+    end
+
     if @topic.update(topic_params)
       flash[:notice] = "Edited successfully!!"
       redirect_to topics_path
@@ -116,7 +121,7 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :description,:status, :category_ids => [])
+    params.require(:topic).permit(:name, :avatar, :description,:status, :category_ids => [])
   end
 
 end
