@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
 
-  before_action :set_topic, :only => [:show, :edit, :update, :destroy, :favorite, :unfavorite, :like, :dislike]
+  before_action :set_topic, :only => [:show, :edit, :update, :destroy, :favorite, :unfavorite, :like, :dislike, :subscribe, :unsubscribe]
   before_action :authenticate_user!, :except => [:index, :show]
 
   #GET topics/
@@ -139,6 +139,28 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html{ redirect_to :back }
       format.js{ render "like"}
+    end
+  end
+
+  def subscribe
+    @subscribe = @topic.find_my_subscribe(current_user)
+    unless @like
+      @subscribe = Subscribe.create!(:topic => @topic, :user => current_user)
+    end
+
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js
+    end
+  end
+
+  def unsubscribe
+    @subscribe = @topic.find_my_subscribe(current_user)
+    @subscribe.destroy if @subscribe
+
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js{ render "subscribe"}
     end
   end
 

@@ -14,6 +14,9 @@ class Topic < ActiveRecord::Base
   has_many :likes, :dependent => :destroy
   has_many :likes_by, :through => :likes, :source => :user, :dependent => :destroy
 
+  has_many :subscribes, :dependent => :destroy
+  has_many :subscribes_by, :through => :subscribes, :source => :user, :dependent => :destroy
+
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -24,5 +27,9 @@ class Topic < ActiveRecord::Base
 
   def find_my_like(user)
     self.likes.where( :user => user ).first
+  end
+
+  def find_my_subscribe(user)
+    self.subscribes.where( :user => user ).first
   end
 end

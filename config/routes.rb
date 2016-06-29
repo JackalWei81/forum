@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
       post :like
       post :dislike
+
+      post :subscribe
+      post :unsubscribe
     end
   end
 

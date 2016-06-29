@@ -1,0 +1,5 @@
+  <% unless @topic.find_my_subscribe(current_user) %>
+    <%= link_to fa_icon("feed")+"訂閱", subscribe_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-primary" %>
+  <% else %>
+    <%= link_to fa_icon("feed")+"取消訂閱", unsubscribe_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-danger" %>
+  <% end %>
