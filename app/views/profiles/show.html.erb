@@ -16,5 +16,13 @@
 <% current_user.favorites.each do |f| %>
   <h3><%= link_to f.name, topic_path(f) %></h3>
 <% end %>
+<h2>Likes:</h2>
+<% current_user.like_topics.each do |l| %>
+  <h3><%= link_to l.name, topic_path(l) %></h3>
+<% end %>
+<h2>Subscribes:</h2>
+<% current_user.subscribe_topics.each do |s| %>
+  <h3><%= link_to s.name, topic_path(s) %></h3>
+<% end %>
 
-<p><%= link_to "Back to index", topics_path %></p>
+<p><%= link_to "Back to index", topics_path, :class => "btn btn-info" %></p>
