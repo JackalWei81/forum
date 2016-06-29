@@ -2,4 +2,4 @@
     <%= link_to fa_icon("heart")+"收藏", favorite_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-primary" %>
   <% else %>
     <%= link_to fa_icon("heart")+"取消收藏", unfavorite_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-danger" %>
-  <% end %>
+  <% end %><%= @topic.favorite_by.size %>
