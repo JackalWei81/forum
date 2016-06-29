@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~>3.3.4'
 # user Authentication
 gem 'devise'
+# font-awesome
+gem "font-awesome-rails"
 # select
 gem "select2-rails"
 # use facebook login

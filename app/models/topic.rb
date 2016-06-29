@@ -11,11 +11,18 @@ class Topic < ActiveRecord::Base
   has_many :favorite_topics, :dependent => :destroy
   has_many :favorite_by, :through => :favorite_topics, :source => :user, :dependent => :destroy
 
+  has_many :likes, :dependent => :destroy
+  has_many :likes_by, :through => :likes, :source => :user, :dependent => :destroy
+
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
 
   def find_my_favorite(user)
-  self.favorite_topics.where( :user => user ).first
+    self.favorite_topics.where( :user => user ).first
+  end
+
+  def find_my_like(user)
+    self.likes.where( :user => user ).first
   end
 end

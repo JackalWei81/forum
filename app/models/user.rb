@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :favorite_topics, :dependent => :destroy
   has_many :favorites, :through => :favorite_topics, :source => :topic, :dependent => :destroy
 
+  has_many :likes, :dependent => :destroy
+  has_many :like_topics, :through => :likes, :source => :topic, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

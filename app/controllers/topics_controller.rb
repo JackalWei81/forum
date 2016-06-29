@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
 
-  before_action :set_topic, :only => [:show, :edit, :update, :destroy, :favorite, :unfavorite]
+  before_action :set_topic, :only => [:show, :edit, :update, :destroy, :favorite, :unfavorite, :like, :dislike]
   before_action :authenticate_user!, :except => [:index, :show]
 
   #GET topics/
@@ -117,6 +117,28 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html{ redirect_to :back }
       format.js { render "favorite"}
+    end
+  end
+
+  def like
+    @like = @topic.find_my_like(current_user)
+    unless @like
+      @like = Like.create!(:topic => @topic, :user => current_user)
+    end
+
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js
+    end
+  end
+
+  def dislike
+    @like = @topic.find_my_like(current_user)
+    @like.destroy if @like
+
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js{ render "like"}
     end
   end
 

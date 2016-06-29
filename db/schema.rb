@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628115037) do
+ActiveRecord::Schema.define(version: 20160629105924) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20160628115037) do
 
   add_index "favorite_topics", ["topic_id"], name: "index_favorite_topics_on_topic_id"
   add_index "favorite_topics", ["user_id"], name: "index_favorite_topics_on_user_id"
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "likes", ["topic_id"], name: "index_likes_on_topic_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"

@@ -1,0 +1,5 @@
+  <% unless @topic.find_my_like(current_user) %>
+    <%= link_to fa_icon("thumbs-up x").to_s, like_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-primary" %>
+  <% else %>
+    <%= link_to fa_icon("thumbs-down x").to_s, dislike_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-danger" %>
+  <% end %>
