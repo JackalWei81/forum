@@ -1,11 +1,9 @@
 <h2><%= @topic.name%></h2>
 <div class="favorite pull-right">
 <% if user_signed_in? %>
-  <% unless @topic.find_my_favorite(current_user) %>
-    <%= link_to "收藏", favorite_topic_path(@topic), :method => :post, :class => "btn btn-primary" %>
-  <% else %>
-    <%= link_to "取消收藏", unfavorite_topic_path(@topic), :method => :post, :class => "btn btn-danger" %>
-  <% end %>
+  <span id="favorite-block"%>
+    <%= render "favorite" %>
+  </span>
 <% end %>
 </div>
 

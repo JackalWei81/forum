@@ -104,13 +104,20 @@ class TopicsController < ApplicationController
     unless @favorite
       @favorite = FavoriteTopic.create!(:topic => @topic, :user => current_user)
     end
-    redirect_to :back
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js
+    end
   end
 
   def unfavorite
     @favorite = @topic.find_my_favorite(current_user)
     @favorite.destroy if @favorite
-    redirect_to :back
+
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js { render "favorite"}
+    end
   end
 
   #以下為controller內部使用的method
