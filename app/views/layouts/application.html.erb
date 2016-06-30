@@ -28,7 +28,7 @@
       <% if user_signed_in? %>
         <% if current_user.profile %>
           <%= image_tag current_user.gravatar_url %>
-          <%= link_to current_user.short_name, profile_path(current_user.profile) %>
+          <%= link_to current_user.short_name, profile_path(current_user.short_name) %>
         <% else %>
           <%= current_user.short_name %>
         <% end %>,你好!

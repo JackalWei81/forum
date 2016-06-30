@@ -40,7 +40,9 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find(params[:id])
+    #設定傳入參數為short_name,再傳過來後經過轉換轉回:id，即可繼續原本操作
+    user = User.where(["email like ?", "%#{params[:id]}@%"]).first
+    @profile = Profile.find(user)
   end
 
 end
