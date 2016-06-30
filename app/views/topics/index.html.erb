@@ -64,22 +64,24 @@
           <%= t.updated_at.localtime.strftime('%b %d %Y %H:%M') %>
         </td>
         <td class="text-center">
-          <% t.comments.each do |c| %>
+          <% t.comments.group(:user_id).each do |c| %>
             <%= c.user.short_name %>
           <% end %>
         </td>
-        <% if user_signed_in? %>
         <td class="text-center">
+        <% if user_signed_in? %>
           <% if current_user.is_author?(t) %>
             <%= link_to "Edit", edit_topic_path(t), :class => "btn btn-primary" %>
           <% end %>
+        <% end %>
         </td>
         <td class="text-center">
+        <% if user_signed_in? %>
           <% if current_user.is_author?(t) || current_user.is_role? %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
           <% end %>
-        </td>
         <% end %>
+        </td>
       </tr>
     <% end %>
   <% end %>
