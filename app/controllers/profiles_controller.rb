@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
     if @profile.save
       flash[:notice] = "Created successfully!!"
-      redirect_to profile_path(@profile)
+      redirect_to profile_path(@profile.user.short_name)
     else
       render :action => :new
     end
@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
   def update
     if @profile.update(profile_params)
       flash[:notice] = "Edited successfully!!"
-      redirect_to profile_path(@profile)
+      redirect_to profile_path(@profile.user.short_name)
     else
       render :action => :edit
     end
@@ -42,7 +42,8 @@ class ProfilesController < ApplicationController
   def set_profile
     #設定傳入參數為short_name,再傳過來後經過轉換轉回:id，即可繼續原本操作
     user = User.where(["email like ?", "%#{params[:id]}@%"]).first
-    @profile = Profile.find(user)
+    @profile = Profile.find_by(user_id: user.id)
+
   end
 
 end

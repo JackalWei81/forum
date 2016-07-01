@@ -1,4 +1,4 @@
-<%= form_for @profile, :url => profile_path(@profile), :method => :patch do |f| %>
+<%= form_for @profile, :url => profile_path(@profile.user.short_name), :method => :patch do |f| %>
   <div class="form-group">
     <%= f.label :bio, "Personal Profile：" %><br>
     <%= f.text_area :bio, class: "form-control"%>

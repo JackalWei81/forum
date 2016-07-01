@@ -37,7 +37,7 @@
         <% unless current_user.profile %>
           <%= link_to "新增個人簡介", new_profile_path %>
         <% else %>
-          <%= link_to "編輯個人簡介", edit_profile_path(current_user.profile) %>
+          <%= link_to "編輯個人簡介", edit_profile_path(current_user.short_name) %>
         <% end %>
       <% else %>
         <%= link_to('註冊', new_registration_path(:user)) %> |
