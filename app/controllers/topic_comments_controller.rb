@@ -32,11 +32,17 @@ class TopicCommentsController < ApplicationController
     @comment = @topic.comments.find(params[:id])
     if current_user.is_author?(@comment) || current_user.is_role?
       @comment.destroy
-      flash[:alert] = "Delete successfully!!"
+      respond_to do |format|
+        format.html {
+          flash[:alert] = "Delete successfully!!"
+          redirect_to topic_path(@topic)
+        }
+        format.js #destroy.js.erb
+      end
     else
       flash[:alert] = "You are not author!!"
+      redirect_to topic_path(@topic)
     end
-    redirect_to topic_path(@topic)
   end
 
 

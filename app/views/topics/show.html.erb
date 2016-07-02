@@ -47,7 +47,7 @@
 <table class="table">
   <% @comments.each do |c|%>
     <% if c.status == "published" || (user_signed_in? && (current_user.is_role? || current_user.is_author?(c))) %>
-    <tr>
+    <tr id="comment-<%=c.id%>">
       <td>
         <%= c.name %>
       </td>
@@ -62,7 +62,7 @@
       </td>
       <td>
         <% if current_user.is_author?(c) || current_user.is_role? %>
-          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"} %>
+          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"}, :remote => true %>
         <% end %>
       </td>
       <% end %>
