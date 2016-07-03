@@ -1,3 +1,9 @@
+<%= content_for :head do %>
+  <%= tag(:meta, :content => @topic.name, :property => "og:title") %>
+  <%= tag(:meta, :content => "article", :property => "og:type") %>
+  <%= tag(:meta, :content => topic_url(@topic), :property => "og:url") %>
+  <%= tag(:meta, :content => "Forum practice", :property => "og:site_name") %>
+<% end %>
 <h2><%= @topic.name%></h2>
 <div class="favorite pull-right">
 <% if user_signed_in? %>
@@ -22,7 +28,7 @@
 </div>
 
 <div class="facebook-like_and_share">
-<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+<iframe src="https://www.facebook.com/plugins/like.php?href=<%= topic_url(@topic) %>&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 </div>
 <hr>
 <% if @topic.avatar.exists? %>
