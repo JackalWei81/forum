@@ -30,11 +30,16 @@
 <div class="facebook-like_and_share">
 <iframe src="https://www.facebook.com/plugins/like.php?href=<%= topic_url(@topic) %>&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=1742195576039423" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 </div>
-<hr>
 <% if @topic.avatar.exists? %>
   <%= image_tag(@topic.avatar.url(:medium)) %>
+  <hr>
 <% end %>
-<hr>
+<% if @topic.photos.exists?%>
+  <% @topic.photos.each do |image| %>
+    <%= image_tag (image.photo.url(:medium))%>
+  <% end %>
+  <hr>
+<% end %>
 <h4>
 <% @topic.categories.each do |c| %>
   <%= c.name %>

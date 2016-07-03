@@ -20,6 +20,8 @@ class Topic < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  has_many :photos, :dependent => :destroy
+
 
   def find_my_favorite(user)
     self.favorite_topics.where( :user => user ).first

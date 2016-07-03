@@ -37,6 +37,11 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user = current_user
     if @topic.save
+      if params[:photos]
+        params[:photos].each { |photo|
+          @topic.photos.create(:photo => photo)
+        }
+      end
       flash[:notice] = "Created successfully!!"
       redirect_to topics_path
     else
@@ -77,7 +82,16 @@ class TopicsController < ApplicationController
   def update
 
     if params[:remove_image] == "1"
-      @topic.avatar = nil
+      @topic.avatar.destroy
+    end
+
+    if params[:remove_photos] == "1"
+      @topic.photos.destroy_all
+      if params[:photos]
+        params[:photos].each { |photo|
+          @topic.photos.create(:photo => photo)
+        }
+      end
     end
 
     if @topic.update(topic_params)
@@ -172,7 +186,7 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :avatar, :description,:status, :category_ids => [])
+    params.require(:topic).permit(:name, :avatar, :photos, :description,:status, :category_ids => [])
   end
 
 end

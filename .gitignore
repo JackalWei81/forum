@@ -15,5 +15,5 @@
 /log/*
 !/log/.keep
 /tmp
-/pubilc/system
+/pubilc/system/*
 /config/facebook.yml

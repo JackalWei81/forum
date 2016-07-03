@@ -18,6 +18,13 @@
       <%= check_box_tag "remove_image", "1" %> Remove Image
     <% end %>
   </div>
+  <div class="form-group">
+    <%= f.label :photos  %>
+      <%= file_field_tag "photos[]", type: :file, multiple: true %>
+      <% if @topic.photos.exists? %>
+        <%= check_box_tag "remove_photos", "1" %> Updtae Photos
+    <% end %>
+  </div>
   <!-- category->category -->
   <div class="form-group">
     <%= f.label :category %>
