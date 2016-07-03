@@ -50,11 +50,11 @@ class TopicsController < ApplicationController
     @topic.views_count += 1
     @topic.save
 
-    @comments = @topic.comments.page(params[:page]).per(6)
+    @comments = @topic.comments
     if params[:e_id]
       @comment = @topic.comments.find(params[:e_id])
       unless current_user.is_author?(@comment)
-        @comment = nil
+        @comment = @topic.comments.build
       end
     else
       @comment = @topic.comments.build
