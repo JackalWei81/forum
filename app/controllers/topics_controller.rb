@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
     @topic.views_count += 1
     @topic.save
 
-    @comments = @topic.comments
+    @comments = @topic.comments.all
     if params[:e_id]
       @comment = @topic.comments.find(params[:e_id])
       unless current_user.is_author?(@comment)
