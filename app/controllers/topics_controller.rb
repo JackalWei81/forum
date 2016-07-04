@@ -158,7 +158,7 @@ class TopicsController < ApplicationController
 
   def subscribe
     @subscribe = @topic.find_my_subscribe(current_user)
-    unless @like
+    unless @subscribe
       @subscribe = Subscribe.create!(:topic => @topic, :user => current_user)
     end
 
