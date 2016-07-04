@@ -61,7 +61,7 @@
           <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>
         </td>
         <td class="text-center">
-          <%= t.updated_at.localtime.strftime('%b %d %Y %H:%M') %>
+          <%= t.updated_at.localtime.to_s(:short) %>
         </td>
         <td class="text-center">
           <% t.comments.group(:user_id).each do |c| %>
