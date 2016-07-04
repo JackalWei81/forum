@@ -44,7 +44,7 @@
     </td>
   </tr>
   <% @topics.each do |t| %>
-    <% if t.status == "published" || (user_signed_in? && (current_user.is_role? || current_user.is_author?(t))) %>
+    <% if t.status == "published" || (user_signed_in? && (current_user.is_admin? || current_user.is_author?(t))) %>
       <tr>
         <td>
           <%= link_to t.name, topic_path(t) %>
@@ -77,7 +77,7 @@
         </td>
         <td class="text-center">
         <% if user_signed_in? %>
-          <% if current_user.is_author?(t) || current_user.is_role? %>
+          <% if current_user.is_author?(t) || current_user.is_admin? %>
             <%= link_to "Delete", topic_path(t), :method => :delete, :data => {:confirm => "Are you sure?"}, :class => "btn btn-danger" %>
           <% end %>
         <% end %>

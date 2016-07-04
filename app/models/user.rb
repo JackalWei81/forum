@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
     end
   end
 
-    def is_role?
+    def is_admin?
       self.role == "Admin"
   end
 end

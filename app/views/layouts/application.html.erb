@@ -20,7 +20,7 @@
         <div class="alert alert-danger" role="alert"><%=flash[:alert] %> </div>
       <% end %>
 
-      <% if user_signed_in? && current_user.is_role? %>
+      <% if user_signed_in? && current_user.is_admin? %>
         <%= link_to "Enter Admin", admin_topics_path, :class => "btn btn-danger" %>
       <% end %>
 

@@ -55,7 +55,7 @@ class TopicsController < ApplicationController
     @topic.views_count += 1
     @topic.save
 
-    @comments = @topic.comments.all
+    @comments = @topic.comments
     if params[:e_id]
       @comment = @topic.comments.find(params[:e_id])
       unless current_user.is_author?(@comment)
@@ -104,7 +104,7 @@ class TopicsController < ApplicationController
 
   #DELETE topic/:id
   def destroy
-    if current_user.is_author?(@topic) || current_user.is_role?
+    if current_user.is_author?(@topic) || current_user.is_admin?
       @topic.destroy
       flash[:alert] = "Deleted successfully !!"
     else

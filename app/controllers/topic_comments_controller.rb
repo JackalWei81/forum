@@ -30,7 +30,7 @@ class TopicCommentsController < ApplicationController
 
   def destroy
     @comment = @topic.comments.find(params[:id])
-    if current_user.is_author?(@comment) || current_user.is_role?
+    if current_user.is_author?(@comment) || current_user.is_admin?
       @comment.destroy
       respond_to do |format|
         format.html {

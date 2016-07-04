@@ -57,7 +57,7 @@
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
 <table class="table">
   <% @comments.each do |c|%>
-    <% if c.status == "published" || (user_signed_in? && (current_user.is_role? || current_user.is_author?(c))) %>
+    <% if c.status == "published" || (user_signed_in? && (current_user.is_admin? || current_user.is_author?(c))) %>
     <tr id="comment-<%=c.id%>">
       <td>
         <%= c.name %>
@@ -72,7 +72,7 @@
         <% end %>
       </td>
       <td>
-        <% if current_user.is_author?(c) || current_user.is_role? %>
+        <% if current_user.is_author?(c) || current_user.is_admin? %>
           <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"}, :remote => true %>
         <% end %>
       </td>
