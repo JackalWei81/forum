@@ -7,11 +7,15 @@ class TopicCommentsController < ApplicationController
     @comment = @topic.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:notice] = "Created successfully!!"
-    else
-      flash[:alert] = "Created failure!!"
+      respond_to do |format|
+        format.html {
+          redirect_to topic_path(@topic)
+        }
+        format.js {
+          @comment = @topic.comments.build
+        }
+      end
     end
-    redirect_to topic_path(@topic)
   end
 
   def update
@@ -20,11 +24,14 @@ class TopicCommentsController < ApplicationController
       @comment.avatar = nil
     end
     if @comment.update(comment_params)
-      flash[:notice] = "Edited successfully!!"
-      redirect_to topic_path(@topic)
-    else
-      flash[:alert] = "Edited failure!!"
-      render :action => :edit
+      respond_to do |format|
+        format.html {
+          redirect_to topic_path(@topic)
+        }
+        format.js {
+          @comment = @topic.comments.build
+        }
+      end
     end
   end
 

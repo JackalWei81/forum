@@ -55,52 +55,7 @@
 <% end %>
 </h5>
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
-<table class="table">
-  <% @comments.each do |c|%>
-    <% if c.status == "published" || (user_signed_in? && (current_user.is_admin? || current_user.is_author?(c))) %>
-    <tr id="comment-<%=c.id%>">
-      <td>
-        <%= c.name %>
-      </td>
-      <% if c.avatar.exists? %>
-        <%= image_tag(c.avatar.url(:medium)) %>
-      <% end %>
-      <% if user_signed_in? %>
-      <td>
-        <% if current_user.is_author?(c) %>
-          <%= link_to "Edit", topic_path(@topic, :e_id => c), :class => "btn btn-primary" %>
-        <% end %>
-      </td>
-      <td>
-        <% if current_user.is_author?(c) || current_user.is_admin? %>
-          <%= link_to "Delete", topic_comment_path(@topic, c), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Are you sure?"}, :remote => true %>
-        <% end %>
-      </td>
-      <% end %>
-    </tr>
-    <% end %>
-  <% end %>
-</table>
 <hr>
-<!-- Comment's new and edit -->
-<%= form_for [@topic, @comment], :class => "form" do |f| %>
-  <div class="form-group ">
-  <%= f.label :name, "comment" %>
-  <%= f.text_field :name, :class => "form-control"  %>
-  </div>
-
-    <div class="form-group">
-    <%= f.file_field :avatar %>
-    <% if @comment.avatar.exists? %>
-      <%= check_box_tag "remove_image", "1" %> Remove Image
-    <% end %>
-  </div>
-
-  <div class="form-group">
-  <%= f.label :status, "Status" %>
-  <%= f.select :status, [["Published","published"],["Draft","draft"]] %>
-  </div>
-
-  <%= f.submit "Save", :class => "btn btn-primary" %>
-  <%= link_to "Cancel", :back, :class=>"btn btn-default" %>
-<% end %>
+<div id="comments" >
+  <%= render 'topic_comments/comment' %>
+</div>

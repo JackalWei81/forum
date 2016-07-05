@@ -59,9 +59,8 @@ class User < ActiveRecord::Base
   end
 
   def is_author?(recorder)
-    if self == recorder.user
-      return true
-    end
+    self == recorder.user
+    #修改code，簡化程式碼
   end
 
     def is_admin?
