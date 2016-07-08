@@ -28,20 +28,36 @@
 <h2>Friends</h2>
 <ul>
   <% for friendship in current_user.friendships %>
-    <li>
-      <%= friendship.friend.short_name %>
-      (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
-    </li>
+    <% if friendship.confirmed %>
+      <li>
+        <%= friendship.friend.short_name %>
+        (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>Add Friends</h2>
+<ul>
+  <% for friendship in current_user.friendships %>
+    <% unless friendship.confirmed%>
+      <li>
+        <%= friendship.friend.short_name %>
+        (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
 <h2>Friended by Users</h2>
 <ul>
-  <% for user in current_user.inverse_friends %>
-    <li>
-      <%= user.short_name %>
-      (<%= link_to "consent", friendships_path(:id => current_user, :friend_id => user), :method => :post %>)
-    </li>
+  <% for user in current_user.inverse_friends  %>
+    <% unless user.friendships.find_by(:friend_id => current_user).confirmed %>
+      <li>
+        <%= user.short_name %>
+        (<%= link_to "consent", friendship_path(:id => current_user, :friend_id => user), :method => :patch %>)
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
