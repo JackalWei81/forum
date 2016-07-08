@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :profiles
 
+  resources :friendships
+
   namespace :admin do
     resources :topics
     resources :users

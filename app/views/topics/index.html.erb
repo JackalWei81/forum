@@ -56,6 +56,9 @@
         </td>
         <td class="text-center">
           <%= t.user.short_name%>
+          <% if user_signed_in? %>
+            <%= link_to "Add Friend", friendships_path(:id => current_user, :friend_id => t.user), :method => :post unless current_user == t.user || current_user.friends.include?(t.user) %>
+          <% end %>
         </td>
         <td class="text-center">
           <strong><%= "#{t.comments.size}/#{t.views_count}"%></strong>

@@ -25,4 +25,24 @@
   <h3><%= link_to s.name, topic_path(s) %></h3>
 <% end %>
 
+<h2>Friends</h2>
+<ul>
+  <% for friendship in current_user.friendships %>
+    <li>
+      <%= friendship.friend.short_name %>
+      (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<h2>Friended by Users</h2>
+<ul>
+  <% for user in current_user.inverse_friends %>
+    <li>
+      <%= user.short_name %>
+      (<%= link_to "consent", friendships_path(:id => current_user, :friend_id => user), :method => :post %>)
+    </li>
+  <% end %>
+</ul>
+
 <p><%= link_to "Back to index", topics_path, :class => "btn btn-info" %></p>
