@@ -31,7 +31,7 @@
     <% if friendship.confirmed %>
       <li>
         <%= friendship.friend.short_name %>
-        (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
+        (<%= link_to "Remove", friendship_path(friendship, :remove => "remove"), :method => :delete %>)
       </li>
     <% end %>
   <% end %>
@@ -43,7 +43,7 @@
     <% unless friendship.confirmed%>
       <li>
         <%= friendship.friend.short_name %>
-        (<%= link_to "remove", friendship_path(friendship), :method => :delete %>)
+        (<%= link_to "Cancel", friendship_path(friendship), :method => :delete %>)
       </li>
     <% end %>
   <% end %>
@@ -55,7 +55,7 @@
     <% unless user.friendships.find_by(:friend_id => current_user).confirmed %>
       <li>
         <%= user.short_name %>
-        (<%= link_to "consent", friendship_path(:id => current_user, :friend_id => user), :method => :patch %>)
+        (<%= link_to "Consent", friendship_path(:id => current_user, :friend_id => user), :method => :patch %>)
       </li>
     <% end %>
   <% end %>
