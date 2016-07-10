@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     #可將permit參數一起放在陣列裡面即可
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:bio])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:bio])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:bio, :name, :tag_list])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:bio, :name, :tag_list])
   end
 end

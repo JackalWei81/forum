@@ -35,6 +35,16 @@ class TopicsController < ApplicationController
   #POST topics/
   def create
     @topic = Topic.new(topic_params)
+    content_and_tags = topic_params[:description].split("#")
+    if content_and_tags.count > 1
+      content = content_and_tags.first.strip
+      for index in 1..content_and_tags.count-1
+        current_user.tag_list.add(content_and_tags[index].strip)
+        @topic.tag_list.add(content_and_tags[index].strip)
+      end
+      current_user.save
+    end
+    @topic.description = content
     @topic.user = current_user
     if @topic.save
       if params[:photos]
@@ -95,6 +105,17 @@ class TopicsController < ApplicationController
     end
 
     if @topic.update(topic_params)
+      content_and_tags = topic_params[:description].split("#")
+      if content_and_tags.count > 1
+        content = content_and_tags.first.strip
+        for index in 1..content_and_tags.count-1
+          current_user.tag_list.add(content_and_tags[index].strip)
+          @topic.tag_list.add(content_and_tags[index].strip)
+        end
+        current_user.save
+      end
+      @topic.description = content
+      @topic.save
       flash[:notice] = "Edited successfully!!"
       redirect_to topics_path
     else
@@ -186,7 +207,7 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :avatar, :photos, :description,:status, :category_ids => [])
+    params.require(:topic).permit(:name, :tag_list, :avatar, :photos, :description,:status, :category_ids => [])
   end
 
 end

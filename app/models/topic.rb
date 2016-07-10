@@ -22,6 +22,7 @@ class Topic < ActiveRecord::Base
 
   has_many :photos, :dependent => :destroy
 
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
 
   def find_my_favorite(user)
     self.favorite_topics.where( :user => user ).first
