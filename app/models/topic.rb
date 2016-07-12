@@ -35,4 +35,27 @@ class Topic < ActiveRecord::Base
   def find_my_subscribe(user)
     self.subscribes.where( :user => user ).first
   end
+
+  def read_by(user)
+    if self.access == 1
+      self.user_id == user.id if user
+    elsif self.access == 4
+      (Friendship.where(:user_id => self.user_id, :friend_id => user.id).first && Friendship.where(:user_id => user.id, :friend_id => self.user_id).first) || (self.user_id == user.id) if user
+    else
+      return true
+    end
+  end
+
+  def written_by(user)
+    if self.access == 1
+      self.user_id == user.id if user
+    elsif self.access == 2
+      self.user_id == user.id
+    elsif self.access == 4
+      (Friendship.where(:user_id => self.user_id, :friend_id => user.id).first && Friendship.where(:user_id => user.id, :friend_id => self.user_id).first) || (self.user_id == user.id) if user
+    else
+      return true
+    end
+  end
+
 end

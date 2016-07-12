@@ -36,6 +36,11 @@
   <%= f.select :status, [["Published","published"],["Draft","draft"], ["Scheduled","scheduled"]] , {}, :class => "form-control" %>
 </div>
 
+  <div class="form-group">
+    <%= f.label :access, "閱讀權限" %>
+    <%= f.select :access, [["僅自已可看","1"],["僅能看不能回覆","2"], ["完全開放","3"], ["僅好友","4"]] , {}, :class => "form-control" %>
+  </div>
+
   <!-- description->content -->
   要新增tag，請於tag前加入小寫#，不可使用大寫＃
   <div class="form-group">

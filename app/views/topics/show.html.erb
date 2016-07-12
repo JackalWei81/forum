@@ -60,6 +60,8 @@
 </h5>
 <%= link_to "Back to Index", topics_path, :class => "btn btn-success" %>
 <hr>
+<% if @topic.written_by(current_user) %>
 <div id="comments" >
   <%= render 'topic_comments/comment' %>
 </div>
+<% end %>
