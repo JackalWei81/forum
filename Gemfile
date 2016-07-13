@@ -43,6 +43,10 @@ gem 'acts-as-taggable-on', '~> 3.4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'whenever', :require => false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

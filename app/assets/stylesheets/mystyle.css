@@ -1,0 +1,7 @@
+#schedule {
+  display: none;
+}
+
+#schedule.selected {
+  display: block;
+}

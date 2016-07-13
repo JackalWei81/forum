@@ -33,12 +33,17 @@
 
 <div class="form-group">
   <%= f.label :status, "Status" %>
-  <%= f.select :status, [["Published","published"],["Draft","draft"], ["Scheduled","scheduled"]] , {}, :class => "form-control" %>
+  <%= f.select :status, [["Published","published"],["Draft","draft"], ["Scheduled","scheduled"]], {}, :class => "form-control" %>
+</div>
+
+<div id="schedule" class="form-group">
+  <%= f.label :schedule, "schedule" %>
+  <%= f.date_select :schedule, :class => "form-control" %>
 </div>
 
   <div class="form-group">
     <%= f.label :access, "閱讀權限" %>
-    <%= f.select :access, [["僅自已可看","1"],["僅能看不能回覆","2"], ["完全開放","3"], ["僅好友","4"]] , {}, :class => "form-control" %>
+    <%= f.select :access, [["僅自已可看","1"],["僅能看不能回覆","2"], ["完全開放","3"], ["僅好友","4"]], {}, :class => "form-control" %>
   </div>
 
   <!-- description->content -->
@@ -49,5 +54,21 @@
   </div>
 
   <script>
+
+    if($('#topic_status').find(":selected").val() == "scheduled")
+    {
+      $('#schedule').addClass("selected");
+    }
+
+    $('#topic_status').change(function(e){
+
+      if($('#topic_status').find(":selected").val() == "scheduled"){
+        $('#schedule').addClass("selected");
+      }
+      else{
+        $('#schedule').removeClass("selected");
+      }
+    });
+
     $('#topic_category_ids').select2();
   </script>

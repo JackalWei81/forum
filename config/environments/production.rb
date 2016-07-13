@@ -78,4 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # be sure to have the adapter gem in your Gemfile and follow the adapter specific
+  # installation and deployment instructions
+  config.active_job.queue_adapter = :sidekiq
 end
